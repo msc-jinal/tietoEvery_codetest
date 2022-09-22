@@ -38,6 +38,18 @@ public class TollCalculatorTest {
         assertEquals(22,actualToll,"Calculated toll fee is wrong");
     }
 
+
+    @Test
+    public void test_getTollFee_Moth_Than_Hour(){
+        Vehicle swedishCar = new Car();
+        List<LocalDateTime> tollEntries = new ArrayList<>();
+        tollEntries.add(LocalDateTime.of(2022,4,11,6,25,12));
+        tollEntries.add(LocalDateTime.of(2022,4,11,7,10,12));
+        tollEntries.add(LocalDateTime.of(2022,4,11,9,20,15));
+        int actualToll = tollCalculator.getTollFee(swedishCar,tollEntries);
+        assertEquals(31,actualToll,"Calculated toll fee is wrong");
+    }
+
     @Test
     public void test_getTollFee_MaxToll_forDay(){
         Vehicle swedishCar = new Car();
@@ -52,6 +64,7 @@ public class TollCalculatorTest {
         tollEntries.add(LocalDateTime.of(2022,4,11,12,00,00));
         tollEntries.add(LocalDateTime.of(2022,4,11,13,00,00));
         int actualToll = tollCalculator.getTollFee(swedishCar,tollEntries);
+
         assertEquals(60,actualToll,"Maximum toll for the day should be 60");
     }
 

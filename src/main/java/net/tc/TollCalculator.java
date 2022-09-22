@@ -15,14 +15,11 @@ public class TollCalculator {
     public int getTollFee(Vehicle vehicle, List<LocalDateTime> tollEntries) {
         LocalDateTime intervalStart = tollEntries.get(0);
         int totalFee = 0;
-        int firstTollFee = getSinglePassTollFee(intervalStart, vehicle);
         for (LocalDateTime entryTime : tollEntries) {
             int nextFee = getSinglePassTollFee(entryTime, vehicle);
             long minutes = ChronoUnit.MINUTES.between(intervalStart, entryTime);
             if (minutes <= 60) {
-                if (totalFee > 0) totalFee -= firstTollFee;
-                if (nextFee >= firstTollFee) firstTollFee = nextFee;
-                totalFee += firstTollFee;
+                totalFee = Math.max(totalFee,nextFee);
             } else {
                 totalFee += nextFee;
             }
