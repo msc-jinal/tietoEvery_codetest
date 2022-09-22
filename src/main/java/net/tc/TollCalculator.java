@@ -36,6 +36,7 @@ public class TollCalculator {
         if (tollFreeDays.isFreeDay(date) || vehicle.isTollFreeVehicle()) return 0;
 
         int timeInMinutes = (date.getHour() * 60)+date.getMinute();
+        
         if (timeInMinutes >= (6*60) && timeInMinutes <= (6*60)+29) return 9;
         else if (timeInMinutes >= (6*60)+30 && timeInMinutes <= (6*60)+59) return 16;
         else if (timeInMinutes >= (7*60) && timeInMinutes <= (7*60)+59) return 22;
